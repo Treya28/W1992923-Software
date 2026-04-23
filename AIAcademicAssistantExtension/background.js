@@ -223,7 +223,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
   // Forward the task to the Flask backend for keyword-based tool matching
   if (request.action === 'analyseTask') {
-    fetch('http://localhost:7700/analyze', {
+    fetch('https://w19929235-fyp.hf.space:7860/analyse', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ task: request.task })
@@ -240,6 +240,6 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 chrome.alarms.create('pingBackend', { periodInMinutes: 5 });
 chrome.alarms.onAlarm.addListener((alarm) => {
   if (alarm.name === 'pingBackend') {
-    fetch('http://localhost:7700/health').catch(() => {});  // ignore failures — server may just be offline
+    fetch('https://w19929235-fyp.hf.space:7860/health').catch(() => {});  // ignore failures — server may just be offline
   }
 });
