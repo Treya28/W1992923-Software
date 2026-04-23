@@ -204,5 +204,5 @@ def health_check():
     return "Backend is running!", 200
     
 if __name__ == '__main__':
-    print("\n[startup] Server starting on http://localhost:7700\n")
+    print("\n[startup] Server starting on https://w19929235-fyp.hf.space:7860\n")
     app.run(host='0.0.0.0', port=7860, debug=True)

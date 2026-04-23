@@ -1,4 +1,6 @@
-My program consist of a browser extension for Google Chrome, and a Python server.
+This program consist of a browser extension for Google Chrome, and a Python server.
+
+Notes for running bakend hosted on Hugging Faces -----------------------------------
 
 1. Open Google Chrome 
 
@@ -14,20 +16,29 @@ My program consist of a browser extension for Google Chrome, and a Python server
 
 7. The extention should be active and the icon displayed in the top right-hand corner. It should appear when the active tab is a predefined general AI website and can also be opened by clicking on the icon.
 
+8. Call the 'https://w19929235-fyp.hf.space/health' to ensure the backend is running and awake, before exectuting taaks inputs. Without this the gemini response may time out and not display.
 
-Notes for running unhosted:
-1. In bash terminal to execute python server: go to backend directory, activate the enviroment (venv) and run server.py:
-    ./start_server.sh
 
-2. To test if backend server is running: 'http://localhost:7700/health'
-    if running, status will return 'healthy'
-    
-3. To deactivate the enviroment: 
-    Type 'deactivate'
+Notes if running backend unhosted ----------------------------------------------
+If running the the browser extension on the local server:
 
-4. Change terminal shell to bash:
+1. Change terminal shell to bash:
     chsh -s /bin/bash
 
-5. To confirm what type of terminal shell:
+2. To confirm what type of terminal shell:
     echo $shell
+
+3. Ensure the enviroment is active: Requires navigation to backend directory,   activate the enviroment (venv) and run server.py. 
+These steps are are all exectured using the folowing command in the bash terminal:
+    Type: './start_server.sh'
+
+4. Update the endpoint URLs (/analyse, /analyse-llm and /health) have been to rather include 'http://localhost:7700' in the files: 
+    server.py, background.js and popup.js
+
+5. To test if backend server is running: 'http://localhost:7700/health'
+    if running, status will return 'healthy'
+    
+6. To deactivate the enviroment: 
+    Type: 'deactivate'
+
 
