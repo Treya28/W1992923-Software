@@ -22,17 +22,19 @@ Notes for running bakend hosted on Hugging Faces -------------------------------
 Notes if running backend unhosted ----------------------------------------------
 If running the the browser extension on the local server:
 
+1. Update 'env.noKey' file in the backend. 
+This file is to contain the Gemini API Key. It has been changed in the repository, due to previously becoming comprimised and disabled by Google Gemini. A new key is now used and found in the Final year Report (Appendix 2) and last submission's text.
+The 'env.noKey' must be renamed in the backend folder to become '.env', and the 'GEMINI_API_KEY' pasted as displayed (without '').
+
 1. Change terminal shell to bash:
     chsh -s /bin/bash
 
 2. To confirm what type of terminal shell:
     echo $shell
+	
+3. Run the './set.sh' bash script to create the python environment, and install the dependencies.
 
-3. Create '.env' file in the backend. 
-This file is to contain the Gemini API Key. It has been removed the repository, due to previously becoming comprimised and disabled by Google Gemini. A new key is now used and included in the Final year Report (Appendix 2) and last submission's text.
-An '.env' file must be created in the backend folder, and the 'GEMINI_API_KEY' pasted as provided (without '').
-
-4. Ensure the enviroment is active: Requires navigation to backend directory,   activate the enviroment (venv) and run server.py. 
+4. Ensure the enviroment is active: Requires navigation to backend directory, activate the enviroment (venv) and run server.py. 
 These steps are are all exectured using the folowing command in the bash terminal:
     Type: './start_server.sh'
 
