@@ -28,17 +28,21 @@ If running the the browser extension on the local server:
 2. To confirm what type of terminal shell:
     echo $shell
 
-3. Ensure the enviroment is active: Requires navigation to backend directory,   activate the enviroment (venv) and run server.py. 
+3. Create '.env' file in the backend. 
+This file is to contain the Gemini API Key. It has been removed the repository, due to previously becoming comprimised and disabled by Google Gemini. A new key is now used and included in the Final year Report (Appendix 2) and last submission's text.
+An '.env' file must be created in the backend folder, and the 'GEMINI_API_KEY' pasted as provided (without '').
+
+4. Ensure the enviroment is active: Requires navigation to backend directory,   activate the enviroment (venv) and run server.py. 
 These steps are are all exectured using the folowing command in the bash terminal:
     Type: './start_server.sh'
 
-4. Update the endpoint URLs (/analyse, /analyse-llm and /health) have been to rather include 'http://localhost:7700' in the files: 
+5. Update the endpoint URLs (/analyse, /analyse-llm and /health) have been to rather include 'http://localhost:7700' in the files: 
     server.py, background.js and popup.js
 
-5. To test if backend server is running: 'http://localhost:7700/health'
+6. To test if backend server is running: 'http://localhost:7700/health'
     if running, status will return 'healthy'
     
-6. To deactivate the enviroment: 
+7. To deactivate the enviroment: 
     Type: 'deactivate'
 
 
