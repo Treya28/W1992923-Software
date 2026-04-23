@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+
+    <div id="mainView">
+
+      <!-- title and settings  -->
+      <h1>AI Academic Assistant <button id="settingsBtn">⚙</button></h1>
+
+      <!-- Tool Recommender section -->
+      <h2>Tool Recommender</h2>
+
+      <!-- Task input-->
+      <div class="section">
+        <label for="taskInput">Describe your task:</label>
+        <textarea id="taskInput" placeholder="I need to generate an image of a house..."></textarea>
+        <button id="findToolBtn">Find Best AI Tool</button>
+      </div>
+
+      <!-- Status bar — shows loading, success, or error messages -->
+      <div id="status" class="status"></div>
+
+      <!-- Recommendation card — hidden until a tool match is found -->
+      <div id="recommendationSection" class="hidden">
+        <h3>Recommended Tool:</h3>
+        <div id="toolCard" class="tool-card">
+          <!-- Badge shown only when the result came from the AI (not keyword match) -->
+          <span id="aiSuggestedBadge" class="ai-suggested-badge hidden">AI Suggested</span>
+          <h4 id="toolName"></h4>
+          <p id="toolDescription"></p>
+          <div class="actions">
+            <button id="useToolBtn" class="useTool">Use This Tool</button>
+            <button id="promptBuilderBtn" class="promptBuilder">Build Prompt</button>
+          </div>
+        </div>
+
+        <!-- Feedback section -->
+        <div id="feedbackSection" class="feedback-section">
+          <p class="feedback-prompt">Was this recommendation helpful?</p>
+          <div class="feedback-buttons">
+            <button id="thumbsUpBtn" class="feedback-btn">👍 Helpful</button>
+            <button id="thumbsDownBtn" class="feedback-btn feedback-btn--down">👎 Not helpful</button>
+          </div>
+          <!-- Confirmation message after rating, hidden by default -->
+          <p id="feedbackConfirm" class="feedback-confirm hidden"></p>
+        </div>
+      </div>
+
+      <!-- Fallback section when no specialised tool is found -->
+      <div id="generalToolSection" class="hidden">
+        <p>No specialised tool found.</p>
+        <div class="actions">
+          <!-- Opens ChatGPT with the task pre-filled -->
+          <button id="useGeneralBtn" class="useTool">Use General AI</button>
+          <!-- Opens the prompt builder-->
+          <button id="openPromptBuilderBtn" class="promptBuilder">Build Prompt</button>
+        </div>
+      </div>
+
+
+      <!-- Prompt Builder panel — hidden until triggered -->
+      <div id="promptBuilderSection" class="hidden">
+        <div class="prompt-builder-header">
+          <h2>Prompt Builder</h2>
+          <!-- Close button for prompt builder -->
+          <button id="closePromptBuilder" class="closeBtn">✕</button>
+        </div>
+
+        <!-- Template selection grid -->
+        <div id="templateSelection" class="template-section">
+          <p>Select a prompt template:</p>
+          <div class="template-options">
+            <!-- Each card sets template to key used in popup.js templates object -->
+            <div class="template-option" data-template="detailed">
+              <h5>Detailed Instruction</h5>
+              <p>Complex tasks requiring specific details</p>
+            </div>
+            <div class="template-option" data-template="simple">
+              <h5>Simple Request</h5>
+              <p>For straightforward tasks</p>
+            </div>
+            <div class="template-option" data-template="creative">
+              <h5>Creative Generation</h5>
+              <p>For artistic, writing, or creative tasks</p>
+            </div>
+            <div class="template-option" data-template="image">
+              <h5>Image Generation</h5>
+              <p>Create detailed prompts for AI image generation</p>
+            </div>
+            <div class="template-option" data-template="technical">
+              <h5>Technical/Code</h5>
+              <p>For programming, analysis, or technical tasks</p>
+            </div>
+            <div class="template-option" data-template="code">
+              <h5>Code Explanation</h5>
+              <p>Get explanations for code snippets</p>
+            </div>
+            <div class="template-option" data-template="rewrite">
+              <h5>Content Rewriting</h5>
+              <p>Rewrite or improve existing text</p>
+            </div>
+            <div class="template-option" data-template="summarise">
+              <h5>Research Summary</h5>
+              <p>Summarise research papers or articles</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Template form input fields -->
+        <div id="templateForm" class="hidden template-section">
+          <h5 id="templateTitle"></h5>
+          <p id="templateDescription" class="description"></p>
+
+          <!-- Fields from openTemplateForm() in popup.js -->
+          <div class="form-fields" id="templateFields"></div>
+
+          <div class="actions">
+            <button id="generatePromptBtn" class="useTool">Generate Optimised Prompt</button>
+            <button id="backToTemplatesBtn" class="promptBuilder">Back to Templates</button>
+          </div>
+        </div>
+
+        <!-- Generated prompt display -->
+        <div id="generatedPromptSection" class="hidden template-section">
+          <h5>Optimised Prompt:</h5>
+          <!-- Assembled prompt text -->
+          <div class="prompt-display" id="finalPrompt"></div>
+
+          <div class="prompt-actions">
+            <button id="copyPromptBtn" class="useTool">Copy Prompt</button>
+            <button id="editPromptBtn" class="promptBuilder">Edit</button>
+          </div>
+
+          <!-- Confirmation or error message after the copy attempt -->
+          <div id="copyStatus" class="status small"></div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+  <script src="popup.js"></script>
+
+</body>
+</html>

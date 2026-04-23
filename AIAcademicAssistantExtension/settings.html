@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- Styles for settings page are included here as is opened as a tab, not inside an iframe -->
+  <style>
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      padding: 20px;
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: rgb(236, 244, 233);
+    }
+
+    label {
+      font-weight: 600;
+      color: #9a2270;
+      font-size: 16px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    h1{
+      font-weight: 600;
+      color: #265621;
+      font-size: 30px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      align-items: center;
+    }
+
+    h3 {
+      font-weight: 600;
+      color: #9a2270;
+      font-size: 17px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    p {
+      color: #204620;
+      font-size: 15px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    /* Setting blocks ────────────────────────────────────────────────────────── */
+    .setting {
+      margin: 20px 0;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #e6b0cd 0%, #cba0bb 100%)
+    }
+
+    /* Buttons ─────────────────────────────────────────────────────────────── */
+    button {
+      background: linear-gradient(135deg, #e44634 0%, #aa2c1c 100%);
+      color: white;
+      border: 1px solid #9a2270;
+      padding: 10px 20px;
+      border-radius: 6px;
+      box-shadow: 0 2px 8px rgba(244, 74, 247, 0.3);
+      margin-top: 12px;
+    }
+    button:hover {
+      background: linear-gradient(135deg, #dd3421 0%, #962112 100%);
+      border: 1px solid #e43492;
+      box-shadow: 0 4px 12px rgba(244, 74, 247, 0.4);
+    }
+
+    .setting-desc {
+      color: #666;
+      font-size: 15px;
+      margin: 4px 0 12px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    .no-data {
+      color: #787777;
+      font-style: italic;
+      font-size: 14px;
+      margin: 8px 0;
+    }
+
+    /* Profile rows ────────────────────────────────────────────────────────── */
+    .profile-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 6px 0;
+      font-size: 14px;
+      border-bottom: 1px solid #f0f0f0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    .profile-label {
+      color: #666;
+    }
+    .profile-value {
+      font-weight: 600;
+      color: #333;
+    }
+
+    /* Feedback stats table ───────────────────────────────────────────── */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      font-size: 14px;
+      background: linear-gradient(135deg, rgb(179, 216, 172), #7fb982)
+    }
+    th, td {
+      padding: 7px 10px;
+      text-align: left;
+      border: 1px solid #265621;
+    }
+    th {
+      background: #f8f8f8;
+      font-weight: 600;
+      color: #555;
+      font-size: 15px;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: rgb(150, 200, 141)
+    }
+    /* Green text for tools with >= 60% helpfulness rate */
+    .acc-good {
+      color: #1e7b1e;
+      font-weight: 700;
+    }
+    /* Red text for tools below 60% helpfulness */
+    .acc-bad  {
+      color: #cc0000;
+      font-weight: 700;
+    }
+    .stats-total {
+      font-size: 13px;
+      color: #555;
+      margin: 4px 0 8px;
+    }
+
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>AI Academic Assistant Settings</h1>
+
+  <!-- Controls whether the extension auto-shows on AI websites -->
+  <div class="setting">
+    <label>
+      <input type="checkbox" id="contextualActivation" checked>
+      Enable Contextual Activation
+    </label>
+    <p>Show suggestions when visiting AI websites</p>
+  </div>
+
+  <!-- Clears the site dismissed flags so pop-ups appear again -->
+  <div class="setting">
+    <h3>Reset Dismissed Widgets</h3>
+    <button id="resetWidgets">Reset All Dismissed Widgets</button>
+    <p>This will show the suggestion widget again on all AI websites</p>
+  </div>
+
+  <!-- Shows user profile saved from the prompt builder -->
+  <div class="setting">
+    <h3>Your Profile</h3>
+    <p class="setting-desc">Saved automatically when you generate a prompt. Pre-fills future Prompt Builder sessions.</p>
+
+    <!-- Profile data rows — shown only when a profile has been saved -->
+    <div id="profileDisplay" class="hidden">
+      <div class="profile-row">
+        <span class="profile-label">Course / Faculty:</span>
+        <span class="profile-value" id="profileCourse">—</span>
+      </div>
+      <div class="profile-row">
+        <span class="profile-label">Year of Study:</span>
+        <span class="profile-value" id="profileYear">—</span>
+      </div>
+      <button id="clearProfile" class="btn-clearProfile">Clear Profile</button>
+    </div>
+
+    <!-- Shown when no profile has been saved -->
+    <p id="noProfile" class="no-data">No profile saved yet. Use the Prompt Builder to save your details.</p>
+  </div>
+
+  <!-- Feedback stats: table of thumbs-up/down ratings per tool -->
+  <div class="setting">
+    <h3>Recommendation Feedback</h3>
+    <p class="setting-desc">Helpfulness data collected from your thumbs up / down ratings in the popup.</p>
+    <!-- Table is injected by loadFeedbackStats() in settings.js -->
+    <div id="feedbackStatsContainer">
+      <p class="no-data">No feedback recorded yet.</p>
+    </div>
+    <button id="clearFeedback" class="btn-clearFeedback">Clear All Feedback Data</button>
+  </div>
+
+  <script src="settings.js"></script>
+</body>
+</html>

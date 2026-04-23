@@ -1,0 +1,481 @@
+body {
+  width: 330px;
+  padding: 15px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: rgb(236, 244, 233);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* ── Headings ────────────────────────────────────────────────────────────────  */
+
+h1{
+  font-size: 25px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  padding: 15px 25px;
+  border-radius:15px 15px 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: rgb(238, 248, 233);
+  background: linear-gradient(135deg, #e43492 0%, #9a2270 100%);
+  border-bottom: 2px solid #e43492;
+  margin: -25px;  /* pulls the header flush to the popup edges */
+}
+
+h2 {
+  font-size: 22px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  text-align: left;
+  margin-bottom: 15px;
+  padding-top: 15px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #e43492;  /* pink underline separates sections visually */
+}
+
+h3{
+  font-size: 18px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  text-align: left;
+  padding-top: 20px;
+  padding-bottom: 2px;
+}
+
+/* Section card (task input area) ─────────────────────────────────────────  */
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 15px;
+  margin-top: 15px;
+  background: linear-gradient(135deg, #e6b0cd 0%, #b089a2 100%);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+label {
+  font-weight: 600;
+  color: #9a2270;
+  font-size: 16px;
+}
+
+/* Input textbox ────────────────────────────────────────────────────────────────  */
+textarea {
+  width: 90%;
+  height: 60px;
+  padding: 12px;
+  background: linear-gradient(135deg, #fefcfd 0%, #feeff9 100%);
+  border: 1px solid #e0e6ed;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 14px;
+  resize: vertical;  /* user can drag to make the box taller but not wider */
+  transition: border-color 0.2s;
+}
+
+textarea:focus {
+  outline: none;
+  border-color: #e43492;  /* pink outline when the textarea is active */
+}
+
+/* Buttons ─────────────────────────────────────────────────────────────────  */
+button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+button:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+#settingsBtn {
+  padding: 4px 10px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgb(236, 244, 233);
+  border-radius: 20px;
+  color: rgb(236, 244, 233);
+  font-size: 16px;
+  cursor: pointer;
+  line-height: 1;
+}
+#settingsBtn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+#findToolBtn {
+  background: linear-gradient(135deg, #e43492 0%, #9a2270 100%);
+  color: white;
+  border: 1px solid #9a2270;
+  box-shadow: 0 4px 12px rgba(244, 74, 247, 0.4);
+}
+#findToolBtn:hover {
+  background: linear-gradient(135deg, #ea66ac 0%, #a24b83 100%);
+  border: 1px solid #e43492;
+  box-shadow: 0 6px 16px rgba(244, 74, 247, 0.4);
+}
+
+.useTool {
+  background: linear-gradient(135deg, rgb(101, 173, 88), #2e8732);
+  color: white;
+  border: 1px solid #296029;
+  box-shadow: 0 4px 12px rgba(117, 229, 111, 0.3);
+}
+.useTool:hover {
+  background: linear-gradient(135deg, rgb(150, 200, 141), #579c5a);
+  border: 1px solid #449344;
+  box-shadow: 0 6px 16px rgba(74, 108, 247, 0.4);
+}
+
+.promptBuilder {
+  background: linear-gradient(135deg, #e43492 0%, #9a2270 100%);
+  color: white;
+  border: 1px solid #9a2270;
+  box-shadow: 0 4px 12px rgba(244, 74, 247, 0.4);
+}
+.promptBuilder:hover {
+  background: linear-gradient(135deg, #ea66ac 0%, #a24b83 100%);
+  border: 1px solid #e43492;
+  box-shadow: 0 6px 16px rgba(244, 74, 247, 0.4);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+/* × close button for the prompt builder */
+.closeBtn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #e43492;
+  cursor: pointer;
+  padding: 5px;
+  padding-left: 320px;  /* right of the header row */
+}
+
+/* Tool recommendation card ────────────────────────────────────────────────  */
+
+/* AI Suggestion indicator */
+.ai-suggested-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  letter-spacing: 0.4px;
+}
+
+/* holds the tool recommended */
+.tool-card {
+  background: linear-gradient(135deg, #b8dbb2, #8cc28f);
+  border: 3px solid #449344;
+  border-radius: 8px;
+  padding: 15px;
+  background-color: #f8f9fa;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.tool-card h4 {
+  margin: 0 0 10px 0;
+  color: #306830;
+  font-size: 18px;
+}
+
+.tool-card p {
+  margin: 0 0 20px 0;
+  color: #306830;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+
+/* ── Status messages ─────────────────────────────────────────────────────────  */
+.status {
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 14px;
+  text-align: center;
+}
+
+/* Search in progress */
+.status.info {
+  background: #e8f4ff;
+  color: #0066cc;
+  border: 1px solid #b3d9ff;
+}
+
+/* Succeeded */
+.status.success {
+  background: #e6f7e9;
+  color: #1e7b1e;
+  border: 1px solid #a3d9a3;
+}
+
+/* Response failed */
+.status.error {
+  background: #ffe6e6;
+  color: #cc0000;
+  border: 1px solid #ffb3b3;
+}
+
+
+.status.small {
+  padding: 8px;
+  font-size: 12px;
+  margin-top: 10px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+#generalToolSection > p {
+  font-size: 15px;
+  color: #666;
+  text-align: left;
+  margin: 20 0 12px 0;
+  font-style: italic;
+}
+
+/* Prompt Builder ───────────────────────────────────────────────────────────  */
+
+.prompt-builder-header h5 {
+  margin: 0;
+  color: #9a2270;
+  font-size: 16px;
+}
+
+/* Format for template grid, form, generated prompt */
+.template-section {
+  background: linear-gradient(135deg, #e6b0cd 0%, #b089a2 100%);
+  border-radius: 8px;
+  padding: 20px;
+  margin-top: 15px;
+}
+
+.template-section h5 {
+  margin: 0 0 15px 0;
+  color: #9a2270;
+  font-size: 18px;
+}
+
+.template-section p {
+  font-weight: 650;
+  color: #9a2270;
+  font-size: 17px;
+}
+
+/* Template option grid */
+.template-options {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin: 15px 0;
+}
+
+/* Template cards in grid */
+.template-option {
+  background: linear-gradient(135deg, #fefcfd 0%, #feeff9 100%);
+  border: 2px solid #e0e6ed;
+  border-radius: 8px;
+  border: 1px solid #e43492;
+  box-shadow: 0 4px 12px rgba(244, 74, 247, 0.4);
+  padding: 15px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.template-option:hover {
+  border: 1px solid #e43492;
+  transform: translateY(-2px);  /* lift on hover */
+  box-shadow: 0 6px 16px rgba(244, 74, 247, 0.4);
+}
+
+.template-option.selected {
+  border: 1px solid #e43492;
+  box-shadow: 0 6px 16px rgba(244, 74, 247, 0.4);
+  background: linear-gradient(135deg, #e0d5db 0%, #e8d2e0 100%);
+}
+
+.template-option h5 {
+  margin: 0 0 5px 0;
+  color: #2c3e50;
+  font-size: 14px;
+}
+
+.template-option p {
+  margin: 0;
+  color: #7b8a9b;
+  font-size: 13px;
+  font-style: italic;
+  font-weight: 450;
+}
+
+/* Form Fields ─────────────────────────────────────────────────────────────  */
+.form-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin: 20px 0;
+}
+
+/* Fomat for each label + input */
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.field-group label {
+  font-weight: 600;
+  color: #9a2270;
+  font-size: 14px;
+}
+
+.field-group input,
+.field-group textarea {
+  width: 90%;
+  padding: 10px;
+  background: linear-gradient(135deg, #fefcfd 0%, #feeff9 100%);
+  border: 2px solid #e0e6ed;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 14px;
+}
+
+.field-group input:focus,
+.field-group textarea:focus {
+  outline: none;
+  border-color: #e43492;
+}
+
+/* Prompt Display ──────────────────────────────────────────────────────────  */
+
+.prompt-display {
+  background: linear-gradient(135deg, #fefcfd 0%, #feeff9 100%);
+  border: 2px solid #e43492;
+  border-radius: 8px;
+  padding: 15px;
+  margin: 15px 0;
+  white-space: pre-wrap;  /* preserves newlines in the prompt text */
+  word-wrap: break-word;
+  max-height: 200px;
+  overflow-y: auto;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #2c3e50;
+}
+
+.prompt-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.prompt-actions button {
+  flex: 1;
+}
+
+/* Site Detection Message ───────────────────────────────────────────────────────  */
+  .detection-message {
+    background: linear-gradient(135deg, #e366ea2f 0%, #764ba230 100%);
+    border-left: 4px solid #e43492;
+    padding: 12px;
+    border-radius: 8px;
+    margin-top: 40px;
+  }
+
+  /* AI name */
+  .detection-badge {
+    font-size: 14px;
+    color: #9a2270;
+    font-weight: 600;
+    margin-bottom: 5px;
+  }
+
+  .detection-text {
+    font-size: 15px;
+    color: #333;
+    margin: 0;
+  }
+
+/* Feedback Section ────────────────────────────────────────────────────────   */
+.feedback-section {
+  margin-top: 13px;
+  padding: 12px 14px;
+  background: linear-gradient(135deg, #e366ea2f 0%, #764ba230 100%);
+  border-radius: 8px;
+  border-left: 4px solid #e43492
+}
+
+.feedback-prompt {
+  font-size: 14px;
+  font-weight: 600;
+  color: #555;
+  text-align: center;
+  margin: 0 0 10px 0;
+}
+
+.feedback-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.feedback-btn {
+  flex: 1;
+  padding: 8px 10px;
+  font-size: 13px;
+  background: linear-gradient(135deg, rgb(101, 173, 88), #2e8732);
+  color: white;
+  border: 1px solid #296029;
+  box-shadow: 0 2px 8px rgba(117, 229, 111, 0.3);
+}
+.feedback-btn:hover {
+  background: linear-gradient(135deg, rgb(150, 200, 141), #579c5a);
+  border: 1px solid #449344;
+  box-shadow: 0 4px 12px rgba(74, 108, 247, 0.4);
+}
+
+.feedback-btn--down {
+  background: linear-gradient(135deg, #e44634 0%, #aa2c1c 100%);
+  color: white;
+  border: 1px solid #9a2270;
+  box-shadow: 0 2px 8px rgba(244, 74, 247, 0.3);
+}
+.feedback-btn--down:hover {
+  background: linear-gradient(135deg, #dd3421 0%, #962112 100%);
+  border: 1px solid #e43492;
+  box-shadow: 0 4px 12px rgba(244, 74, 247, 0.4);
+}
+
+.feedback-confirm {
+  font-size: 12px;
+  color: #1e7b1e;
+  text-align: center;
+  margin: 8px 0 0 0;
+  font-weight: 600;
+}
