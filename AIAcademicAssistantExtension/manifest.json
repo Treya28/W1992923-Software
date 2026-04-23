@@ -7,6 +7,7 @@
   "permissions": ["activeTab", "storage", "alarms", "scripting"],
   "host_permissions": [ 
     "http://localhost:7700/*",
+    "https://w19929235-fyp.hf.space:7860/*",
     "https://chat.openai.com/*",
     "https://chatgpt.com/*",
     "https://claude.ai/*",

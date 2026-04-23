@@ -226,7 +226,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // Sends the task to the Flask LLM endpoint and returns the result
   async function fetchLLMSuggestion(task) {
     try {
-      const response = await fetch('http://localhost:7700/analyze-llm', {
+      const response = await fetch('https://w19929235-fyp.hf.space/analyse-llm', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ task })
